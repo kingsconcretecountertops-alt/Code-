@@ -1,47 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Kings Concrete Countertops</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f7f7f7;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 6px;
+      max-width: 500px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      color: #222;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      background: #fafafa;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      background: #375a7f;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #26374d;
+    }
+    .success, .error {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: none;
+    }
+    .success {
+      color: #0c7c59;
+    }
+    .error {
+      color: #9b2226;
+    }
+  </style>
+  <script>
+    // Handle form submission success/failure messaging gracefully
+    window.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('contact-form');
+      var success = document.getElementById('form-success');
+      var error = document.getElementById('form-error');
+      form.addEventListener('submit', function (e) {
+        // Basic HTML fallback: nothing if JS is off
+        // But JS: show inline thanks & prevent redirect from Formspree
+        e.preventDefault();
+        var data = new FormData(form);
+        fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(response => {
+          if (response.ok) {
+            success.style.display = 'block';
+            error.style.display = 'none';
+            form.reset();
+          } else {
+            response.json().then(data => {
+              if (Object.hasOwn(data, 'errors')) {
+                error.textContent = data.errors.map(e => e.message).join(', ');
+              } else {
+                error.textContent = "There was a problem sending your message.";
+              }
+              error.style.display = 'block';
+              success.style.display = 'none';
+            });
+          }
+        }).catch(() => {
+          error.textContent = "There was a problem sending your message.";
+          error.style.display = 'block';
+          success.style.display = 'none';
+        });
+      });
+    });
+  </script>
 </head>
 <body>
-    <h1>Contact Us</h1>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleFormSubmit(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <button type="submit">Send</button>
-    </form>
-    <div id="success-message" style="display:none;">Your message has been sent successfully!</div>
+  <h1>Contact Us</h1>
+  <form id="contact-form" action="https://formspree.io/f/mvzvjjyg" method="POST">
+    <label for="name">Your Name</label>
+    <input id="name" name="name" type="text" required>
 
-    <script>
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        const form = event.target;
-        const data = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                form.reset();
-                document.getElementById('success-message').style.display = 'block';
-            } else {
-                alert('Error sending message. Please try again.');
-            }
-        })
-        .catch(error => {
-            alert('Only one error message.');
-        });
-    }
-    </script>
+    <label for="email">Your Email</label>
+    <input id="email" name="email" type="email" required>
+
+    <label for="message">Your Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+    <div id="form-success" class="success">Thank you for reaching out! We'll get back to you soon.</div>
+    <div id="form-error" class="error"></div>
+  </form>
 </body>
 </html>

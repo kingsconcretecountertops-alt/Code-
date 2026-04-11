@@ -8,11 +8,11 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #f0f0f0;
     background-color: #1a1a1a;
-    background-image: url('https://github.com/user-attachments/assets/643b53a1-24b4-4ed3-be83-3f106c63e1a6');
-    background-size: cover;
-    background-position: center top;
+    background-image: url('https://github.com/user-attachments/assets/efac0da3-d655-4fb6-b58d-59e439c45748');
+    background-size: contain;
+    background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -20,155 +20,242 @@ body {
     flex-direction: column;
 }
 
-/* Header and Navigation */
+/* Header - fixed full-viewport overlay so nav sits in the dark side areas */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
     background: transparent;
     color: white;
-    padding: 2rem 1rem;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(0,0,0,1), 3px 3px 8px rgba(0,0,0,1);
+/* Navigation - display:contents lets the two <ul>s act as direct flex children of header */
+nav {
+    display: contents;
 }
 
 nav ul {
+    pointer-events: all;
     list-style: none;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul.nav-right {
+    align-items: flex-end;
 }
 
 nav a {
-    color: white;
+    color: #FFD700;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.1rem;
+    border: 2px solid rgba(255, 215, 0, 0.8);
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.72);
+    display: block;
+    text-align: center;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: none;
-    text-shadow: 0 0 10px rgba(0,0,0,1), 3px 3px 8px rgba(0,0,0,1);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    min-width: 115px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-nav a:hover {
-    background-color: #e67e22;
-    color: white;
-    transform: translateY(-2px);
+nav a:hover,
+nav a.active {
+    background: #FFD700;
+    color: #1a1a1a;
+    border-color: #FFD700;
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.45);
 }
 
 /* Main Content */
 main {
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 1rem;
+    position: relative;
+    z-index: 10;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
     flex: 1;
+    width: 100%;
 }
 
 main section {
-    background-color: white;
-    padding: 3rem;
+    background-color: rgba(15, 15, 15, 0.88);
+    color: #f0f0f0;
+    padding: 2.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     margin-bottom: 2rem;
+    border: 1px solid rgba(255, 215, 0, 0.15);
 }
 
 main h2 {
-    color: #2c3e50;
-    font-size: 2rem;
+    color: #FFD700;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
-    border-bottom: 3px solid #e67e22;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.45);
     padding-bottom: 0.5rem;
 }
 
 main h3 {
-    color: #34495e;
-    font-size: 1.5rem;
+    color: #e0c060;
+    font-size: 1.3rem;
     margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 main p {
-    color: #555;
+    color: #d0d0d0;
     font-size: 1rem;
     margin-bottom: 1rem;
 }
 
 /* Form Styles */
 .contact-form {
-    margin: 2rem 0;
-    padding: 2rem;
-    background-color: #ecf0f1;
-    border-radius: 8px;
-    border-left: 5px solid #e67e22;
+    margin: 1rem 0 0;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     font-weight: 600;
-    color: #2c3e50;
-    font-size: 1rem;
+    color: #FFD700;
+    font-size: 0.95rem;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #bdc3c7;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid rgba(255, 215, 0, 0.35);
     border-radius: 4px;
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.07);
+    color: #f0f0f0;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #e67e22;
-    box-shadow: 0 0 8px rgba(230, 126, 34, 0.2);
+    border-color: #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 110px;
 }
 
 button {
-    background-color: #e67e22;
-    color: white;
-    padding: 0.75rem 2rem;
+    background-color: #FFD700;
+    color: #1a1a1a;
+    padding: 0.7rem 2rem;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
+    letter-spacing: 0.5px;
 }
 
 button:hover {
-    background-color: #d35400;
+    background-color: #e6c200;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
 }
 
 button:active {
     transform: translateY(0);
 }
 
+.success {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 1rem;
+    display: none;
+    margin-top: 1rem;
+}
+
+.error {
+    color: #f44336;
+    font-weight: bold;
+    font-size: 1rem;
+    display: none;
+    margin-top: 1rem;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    padding: 1rem 0;
+}
+
+.gallery-item {
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    border-color: #FFD700;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+}
+
+.gallery-placeholder {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: rgba(255, 215, 0, 0.35);
+}
+
+.gallery-item-caption {
+    padding: 0.65rem 0.85rem;
+    color: #d0d0d0;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-align: center;
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+}
+
 /* Footer */
 footer {
-    background: transparent;
+    position: relative;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
     color: white;
     text-align: center;
     padding: 0.75rem 1rem;
@@ -176,64 +263,64 @@ footer {
 }
 
 footer p {
-    color: white;
+    color: rgba(255, 215, 0, 0.7);
     font-weight: 400;
     font-size: 0.7rem;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
+/* Responsive Design - stack nav horizontally on smaller screens */
+@media (max-width: 900px) {
+    header {
+        position: relative;
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.82);
+        pointer-events: all;
+        z-index: 100;
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
+    nav {
+        display: block;
+        width: 100%;
+    }
+
+    nav ul,
+    nav ul.nav-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 0.45rem;
     }
 
     nav a {
-        display: block;
-        text-align: center;
+        font-size: 0.82rem;
+        padding: 0.4rem 0.85rem;
+        min-width: auto;
     }
 
-    main section {
-        padding: 1.5rem;
-    }
-
-    main h2 {
-        font-size: 1.5rem;
-    }
-
-    .contact-form {
-        padding: 1rem;
-    }
-
-    button {
-        padding: 0.6rem 1.5rem;
+    main {
+        padding: 1.5rem 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    nav ul {
-        gap: 0.25rem;
-    }
-
     nav a {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.78rem;
+        padding: 0.35rem 0.7rem;
     }
 
     main section {
-        padding: 1rem;
+        padding: 1.5rem 1.25rem;
     }
 
     main h2 {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }

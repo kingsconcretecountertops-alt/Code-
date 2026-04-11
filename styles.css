@@ -9,11 +9,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-image: url('https://github.com/user-attachments/assets/fdec90c5-59a2-4bcb-aa01-8bf51d955dcb');
+    background-color: #1a1a1a;
+    background-image: url('https://github.com/user-attachments/assets/643b53a1-24b4-4ed3-be83-3f106c63e1a6');
     background-size: contain;
-    background-position: center;
+    background-position: center top;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header and Navigation */
@@ -63,6 +67,7 @@ main {
     max-width: 1200px;
     margin: 3rem auto;
     padding: 0 1rem;
+    flex: 1;
 }
 
 main section {
@@ -166,13 +171,14 @@ footer {
     background: transparent;
     color: white;
     text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
+    padding: 0.75rem 1rem;
+    margin-top: auto;
 }
 
 footer p {
     color: white;
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 0.7rem;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
